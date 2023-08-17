@@ -31,7 +31,7 @@ function manifest() {
   return defineManifest({
     // ** Required
     manifest_version: 3,
-    name: "CRXJS React Vite Example",
+    name: "WarpDriven Crawler",
     version: "0.0.1",
 
     // ** Scripts
@@ -50,7 +50,7 @@ function manifest() {
     // ** Views
     action: {
       default_popup: "default_popup.html",
-      default_title: "WP采集",
+      default_title: "WarpDriven Crawler",
     },
     options_page: "options_page.html",
   });

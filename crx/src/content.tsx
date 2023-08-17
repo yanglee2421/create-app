@@ -6,7 +6,7 @@ import ReactDOM from "react-dom/client";
 import { Content } from "@/apps/content";
 
 const root = document.createElement("div");
-root.id = "crx-root";
+root.id = "warpdriven-crx-root";
 document.body.appendChild(root);
 
 ReactDOM.createRoot(root).render(
