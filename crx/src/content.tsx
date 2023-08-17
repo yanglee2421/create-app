@@ -14,7 +14,7 @@ document.body.appendChild(root);
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <Toaster />
+    <Toaster toastOptions={{ style: { zIndex: 99 } }} />
     <Content />
   </React.StrictMode>
 );

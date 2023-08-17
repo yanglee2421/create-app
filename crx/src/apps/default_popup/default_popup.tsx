@@ -1,5 +1,7 @@
 // MUI Imports
-import { Box } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { SettingsOutlined } from "@mui/icons-material";
+
 // import { useState } from "react";
 
 export function DefaultPopup() {
@@ -11,11 +13,11 @@ export function DefaultPopup() {
 
   return (
     <Box sx={{ width: "20rem", height: "30rem" }}>
-      <p>hello world</p>
+      <Typography variant="h4">hello world</Typography>
       <div>show</div>
-      <a href={settingLink} target="__blank">
-        setting
-      </a>
+      <IconButton href={settingLink} target="__blank">
+        <SettingsOutlined />
+      </IconButton>
     </Box>
   );
 }
