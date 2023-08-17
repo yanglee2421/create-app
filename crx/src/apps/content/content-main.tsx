@@ -27,7 +27,7 @@ export function ContentMain() {
     return () => {
       chrome.runtime.onMessage.removeListener(listener);
     };
-  }, []);
+  }, [mutate]);
 
   return <QueryProvider></QueryProvider>;
 }

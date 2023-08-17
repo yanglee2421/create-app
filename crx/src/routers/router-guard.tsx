@@ -48,7 +48,7 @@ export function Component() {
   useEffect(() => {
     if (!data?.isLogged) return;
     mutate();
-  }, [data]);
+  }, [data, mutate]);
 
   return (
     <>
