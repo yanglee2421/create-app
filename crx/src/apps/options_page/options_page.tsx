@@ -1,16 +1,18 @@
-// React Imports
-import { useState } from "react";
+// Components Imports
+import { OptionsPageMain } from "./options_page-main";
+
+// Toast Imports
+import { Toaster } from "react-hot-toast";
 
 // MUI Imports
-import {} from "@mui/material";
+import { CssBaseline } from "@mui/material";
 
 export function OptionsPage() {
-  const [count, setCount] = useState(0);
   return (
     <>
-      hello
-      <p>{count}</p>
-      <button onClick={() => setCount((prev) => prev + 1)}>+1</button>
+      <Toaster />
+      <CssBaseline />
+      <OptionsPageMain />
     </>
   );
 }
