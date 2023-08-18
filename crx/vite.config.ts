@@ -53,5 +53,6 @@ function manifest() {
       default_title: "WarpDriven Crawler",
     },
     options_page: "options_page.html",
+    default_locale: "en",
   });
 }

@@ -10,3 +10,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <OptionsPage />
   </React.StrictMode>
 );
+
+console.log("options", chrome);

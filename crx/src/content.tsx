@@ -14,3 +14,5 @@ ReactDOM.createRoot(root).render(
     <Content />
   </React.StrictMode>
 );
+
+console.log("content", chrome);

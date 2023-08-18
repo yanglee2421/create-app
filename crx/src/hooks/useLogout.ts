@@ -22,8 +22,7 @@ export function useLogout() {
     onError(err) {
       toast.error(err.message);
     },
-    onSuccess(data) {
-      console.log(data);
+    onSuccess() {
       toast.success("Logout Successlly!");
     },
   });
