@@ -1,6 +1,11 @@
 chrome.storage.sync.onChanged.addListener((data) => {
-  const showContextMenus = data.settings?.newValue.showContextMenus;
-  toggleContextMenus(Boolean(showContextMenus));
+  if (!data.settings) return;
+
+  const { newValue } = data.settings;
+  if (!newValue) return;
+
+  const showContextMenus = Boolean(newValue.showContextMenus);
+  toggleContextMenus(showContextMenus);
 });
 
 chrome.runtime.onInstalled.addListener(async () => {

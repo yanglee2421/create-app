@@ -1,15 +1,10 @@
 // React Imports
 import { useEffect } from "react";
 
-// Provider Imports
-import { QueryProvider } from "@/api/provider";
-
 // API Imports
 import { useHtmlPost } from "@/hooks";
 
 export function ContentMain() {
-  console.log(chrome);
-
   // API Hooks
   const { mutate } = useHtmlPost();
 
@@ -29,5 +24,5 @@ export function ContentMain() {
     };
   }, [mutate]);
 
-  return <QueryProvider></QueryProvider>;
+  return <></>;
 }
