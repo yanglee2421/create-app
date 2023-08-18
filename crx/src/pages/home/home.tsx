@@ -1,66 +1,42 @@
 // MUI Imports
-import { Checkbox, FormControlLabel, Tab, Grid } from "@mui/material";
-import {
-  TabContext,
-  TabList,
-  TabListProps,
-  TabPanel,
-  LoadingButton,
-} from "@mui/lab";
-
-// API Imports
-import { useLogout } from "@/hooks";
+import { Tab } from "@mui/material";
+import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 
 // React Imports
-import { useState } from "react";
+import React, { useState } from "react";
 
-export function Home() {
-  const [tabValue, setTabValue] = useState("1");
+// Components Imports
+import { HomeSettings } from "./home-settings";
+import { HomeAccount } from "./home-account";
+
+const map = new Map<string, React.ReactNode>();
+map.set("settings", <HomeSettings />);
+map.set("account", <HomeAccount />);
+map.set("about", <></>);
+
+const tabList = Array.from(map.keys()).map((item) => (
+  <Tab key={item} label={item} value={item} />
+));
+const tabElList = Array.from(map).map(([k, v]) => (
+  <TabPanel key={k} value={k}>
+    {v}
+  </TabPanel>
+));
+
+export const Home = () => {
+  const [tabValue, setTabValue] = useState(() => Array.from(map.keys())[0]);
   const handleTabChange: HandleSubmit = (evt, v) => {
     void evt;
     setTabValue(v);
   };
 
-  // API Hooks
-  const { mutate, isLoading } = useLogout();
-
   return (
     <>
       <TabContext value={tabValue}>
-        <TabList onChange={handleTabChange}>
-          <Tab label="setting" value={"1"} />
-          <Tab label="account" value={"2"} />
-          <Tab label="about" value={"3"} />
-        </TabList>
-        <TabPanel value="1">
-          <Grid container>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Show ContentMenu"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Show ContentMenu"
-              />
-            </Grid>
-          </Grid>
-        </TabPanel>
-        <TabPanel value="2">
-          <LoadingButton
-            onClick={() => mutate()}
-            loading={isLoading}
-            variant="contained"
-            color="error"
-          >
-            logout
-          </LoadingButton>
-        </TabPanel>
-        <TabPanel value="3">333</TabPanel>
+        <TabList onChange={handleTabChange}>{tabList}</TabList>
+        {tabElList}
       </TabContext>
     </>
   );
-}
+};
 type HandleSubmit = TabListProps["onChange"];
