@@ -10,24 +10,16 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 function toggleContextMenus(showContextMenus: boolean) {
   const id = "WarpDriven Crawler";
-  const title = chrome.i18n.getMessage("title");
+  const title = chrome.i18n.getMessage("contextMenus");
 
   if (showContextMenus) {
-    console.log("thiss", title);
-
-    chrome.contextMenus.create({
-      id,
-      title,
-    });
-
+    chrome.contextMenus.create({ id, title });
     chrome.contextMenus.onClicked.addListener(contextMenusListener);
     return;
   }
 
-  try {
-    chrome.contextMenus.remove("WarpDriven Crawler");
-    chrome.contextMenus.onClicked.removeListener(contextMenusListener);
-  } catch {}
+  chrome.contextMenus.removeAll();
+  chrome.contextMenus.onClicked.removeListener(contextMenusListener);
 }
 
 function contextMenusListener(
