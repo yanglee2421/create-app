@@ -3,10 +3,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 // Slice Imports
 import { sliceLogin } from "./slice-login";
+import { sliceSettings } from "./slice-settings";
 
 // Create Reducer
 const reducer = combineReducers({
   [sliceLogin.name]: sliceLogin.reducer,
+  [sliceSettings.name]: sliceSettings.reducer,
 });
 
 // Create Store

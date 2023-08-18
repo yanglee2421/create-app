@@ -1,11 +1,11 @@
 chrome.storage.sync.onChanged.addListener((data) => {
-  const showContextMenus = data.settings.newValue.showContextMenus;
+  const showContextMenus = data.settings?.newValue.showContextMenus;
   toggleContextMenus(Boolean(showContextMenus));
 });
 
 chrome.runtime.onInstalled.addListener(async () => {
   const { settings } = await chrome.storage.sync.get("settings");
-  console.log(settings);
+  toggleContextMenus(settings.showContextMenus);
 });
 
 function toggleContextMenus(showContextMenus: boolean) {
@@ -23,8 +23,11 @@ function toggleContextMenus(showContextMenus: boolean) {
     chrome.contextMenus.onClicked.addListener(contextMenusListener);
     return;
   }
-  chrome.contextMenus.remove("WarpDriven Crawler");
-  chrome.contextMenus.onClicked.removeListener(contextMenusListener);
+
+  try {
+    chrome.contextMenus.remove("WarpDriven Crawler");
+    chrome.contextMenus.onClicked.removeListener(contextMenusListener);
+  } catch {}
 }
 
 function contextMenusListener(

@@ -12,4 +12,5 @@ export const useAppSelector: UseAppSelector = useSelector;
 export { ReduxProvider } from "./redux-provider";
 
 // Slice Exports
-export { sliceLogin } from "./slice-login";
+export * from "./slice-login";
+export * from "./slice-settings";

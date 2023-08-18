@@ -9,7 +9,10 @@ import { Grid, Box } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 // API Imports
-import { useLogin } from "@/hooks";
+// import { useLogin } from "@/hooks";
+
+// Redux Imports
+import { mutateLogin, useAppDispatch } from "@/redux";
 
 export function Login() {
   // Form Hooks
@@ -21,11 +24,14 @@ export function Login() {
   });
 
   // API Hooks
-  const { mutate, isLoading } = useLogin();
+  // const { mutate, isLoading } = useLogin();
+
+  // Redux Hooks
+  const dispatch = useAppDispatch();
 
   const handleSubmit = formCtx.handleSubmit((data) => {
     console.log(data);
-    mutate();
+    dispatch(mutateLogin({ isLogged: true }));
   });
 
   return (
@@ -40,11 +46,7 @@ export function Login() {
               <InputPwd name="pwd" label="Password" />
             </Grid>
             <Grid item xs={12}>
-              <LoadingButton
-                loading={isLoading}
-                type="submit"
-                variant="contained"
-              >
+              <LoadingButton loading={false} type="submit" variant="contained">
                 login
               </LoadingButton>
             </Grid>

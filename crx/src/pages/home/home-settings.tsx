@@ -1,23 +1,17 @@
 // MUI Imports
 import { Grid, FormControlLabel, Checkbox, CheckboxProps } from "@mui/material";
 
-// React Imports
-import { useState } from "react";
+// Redux Imports
+import { useAppDispatch, useAppSelector, mutateSettings } from "@/redux";
 
 export function HomeSettings() {
-  const [checked, setChecked] = useState(false);
-  const handleChange: HandleChange = async (evt, showContextMenus) => {
+  const dispatch = useAppDispatch();
+  const checked = useAppSelector((s) => s.settings.showContextMenus);
+  const handleChange: HandleChange = (evt, showContextMenus) => {
     void evt;
     console.log(showContextMenus);
 
-    await chrome.storage.sync.set({
-      settings: { showContextMenus },
-    });
-    const { settings } = await chrome.storage.sync.get("settings");
-    console.log(settings);
-    const model = Boolean(settings.showContextMenus);
-
-    setChecked(model);
+    dispatch(mutateSettings({ showContextMenus }));
   };
 
   return (
