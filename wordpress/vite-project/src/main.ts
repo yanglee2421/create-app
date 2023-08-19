@@ -1,8 +1,13 @@
+// Vue Imports
 import { createApp } from "vue";
-import "./style.css";
 import App from "./App.vue";
+
+// Plugins Imports
+import { PluginElement } from "@/plugins";
 
 // Vite Imports
 import "vite/modulepreload-polyfill";
 
-createApp(App).mount("#app");
+const app = createApp(App);
+app.use(PluginElement);
+app.mount("#app");
