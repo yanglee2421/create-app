@@ -16,7 +16,10 @@ const el = document.querySelector("#root");
 bootstrap(el);
 
 function bootstrap(el: Element | null) {
-  if (!el) return;
+  if (!el) {
+    console.error("Invalid Element");
+    return;
+  }
 
   // React Root
   ReactDOM.createRoot(el).render(
