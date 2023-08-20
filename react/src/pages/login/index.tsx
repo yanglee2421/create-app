@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import { toBase64 } from "@/utils";
 
 // API Imports
-import { axiosMock } from "@/api/axios-mock";
+import { axiosMock } from "@/api/mock/axios-mock";
 
 export function Component() {
   const dispatch = useAppDispatch();

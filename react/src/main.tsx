@@ -8,6 +8,9 @@ import { App } from "./App";
 // I18n Imports
 import "@/i18n";
 
+// Styles Imports
+import "@/assets/scss/global.scss";
+
 // HTML Element
 const el = document.querySelector("#root");
 bootstrap(el);

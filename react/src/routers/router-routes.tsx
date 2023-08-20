@@ -33,30 +33,6 @@ export const routes: RouteObject[] = [
           return import("@/pages/login");
         },
       },
-      {
-        id: "bottle",
-        path: "bottle",
-        handle: { title: "水罐" },
-        lazy() {
-          return import("@/pages/bottle");
-        },
-      },
-      {
-        id: "magnifier",
-        path: "magnifier",
-        handle: { title: "放大镜" },
-        lazy() {
-          return import("@/pages/magnifier");
-        },
-      },
-      {
-        id: "preformance",
-        path: "preformance",
-        handle: { title: "性能测试" },
-        lazy() {
-          return import("@/pages/preformance");
-        },
-      },
     ],
   },
 ];
