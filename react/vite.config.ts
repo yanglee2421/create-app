@@ -35,14 +35,16 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
 
   return {
     https: false,
-    port: 5173,
     fs: { allow: [".."] },
+    port: 5173,
     proxy: {
       "/dev": {
-        target: "http://127.0.0.1",
-        rewrite: (path) => path.replace(/^\/dev/, ""),
-        changeOrigin: true,
         ws: true,
+        changeOrigin: true,
+        target: "http://127.0.0.1",
+        rewrite(path) {
+          return path.replace(/^\/dev/, "");
+        },
       },
     },
   };
