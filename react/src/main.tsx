@@ -1,10 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+// Vite Imports
+import "vite/modulepreload-polyfill";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// React Imports
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+// App Imports
+import { App } from "./App";
+
+// I18n Imports
+import "@/i18n";
+
+// Fake Database Imports
+import "@/data";
+
+// ** Element
+const el = document.querySelector("#root");
+if (!el) throw new Error("Invalid Element!");
+
+// ** Root
+const root = ReactDOM.createRoot(el);
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

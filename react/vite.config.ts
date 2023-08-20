@@ -18,7 +18,7 @@ export default defineConfig((configEnv) => {
       },
     },
 
-    base: void 0,
+    base: "/react",
     build: build(configEnv),
     server: server(configEnv),
   };
