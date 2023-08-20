@@ -1,0 +1,8 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "vite.config.ts": "index.html, .eslintrc.cjs, .gitignore, .prettierrc, .prettierignore",
+    "README.md": "LICENSE",
+    ".env.development": ".env.*"
+  }
+}
