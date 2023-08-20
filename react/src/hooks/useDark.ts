@@ -14,5 +14,5 @@ export function useDark(callback: Callback) {
     const { signal } = controller;
     queryDark.addEventListener("change", () => callback(queryDark), { signal });
     return () => controller.abort();
-  }, []);
+  }, [callback]);
 }

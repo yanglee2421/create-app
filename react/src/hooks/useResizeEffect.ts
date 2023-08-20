@@ -26,7 +26,7 @@ export function useResizeEffect<TRef extends Element>(effect: Effect) {
 
     // Stop Observe
     return () => obverser.disconnect();
-  }, []);
+  }, [effect]);
 
   return resizeRef;
 }

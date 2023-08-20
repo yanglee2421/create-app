@@ -53,5 +53,5 @@ export const persistor = persistStore(store);
 
 // ** Types
 type RootReducer = typeof rootReducer;
-export type RootState = RootReducer extends Reducer<infer R, any> ? R : unknown;
+export type RootState = RootReducer extends Reducer<infer R> ? R : unknown;
 export type AppDispatch = typeof store.dispatch;
