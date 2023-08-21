@@ -1,8 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <p>error</p>
-  <el-table></el-table>
+  <router-view #default="{ Component }">
+    <keep-alive :max="10">
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <style lang="scss" scoped>
