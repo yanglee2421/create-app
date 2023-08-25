@@ -1,6 +1,7 @@
 // Vite Imports
 import { ConfigEnv, defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import legacy from "@vitejs/plugin-legacy";
 
 // NodeJs Imports
 import { resolve } from "node:path";
@@ -10,7 +11,7 @@ export default defineConfig((configEnv) => {
   void configEnv;
 
   return {
-    plugins: [react()],
+    plugins: [react(), legacy()],
 
     resolve: {
       alias: {
