@@ -1,5 +1,5 @@
 // MUI Imports
-import { ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 
 // Theme Imports
 import { toThemeValue } from "./theme-utils";
@@ -10,6 +10,9 @@ import { useAppSelector } from "@/redux";
 // React Imports
 import React from "react";
 
+// Components Imports
+import { ThemeGlobalStyles } from "./theme-global-styles";
+
 export function ThemeProvider(props: React.PropsWithChildren) {
   // ** Props
   const { children } = props;
@@ -18,5 +21,11 @@ export function ThemeProvider(props: React.PropsWithChildren) {
   const isDark = useAppSelector((s) => s.theme.isDark);
   const theme = toThemeValue({ isDark });
 
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <ThemeGlobalStyles />
+      {children}
+    </MuiThemeProvider>
+  );
 }

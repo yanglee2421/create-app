@@ -18,6 +18,14 @@ export const routes: RouteObject[] = [
         },
       },
       {
+        id: "login",
+        path: "login",
+        handle: { title: "登录" },
+        lazy() {
+          return import("@/pages/login");
+        },
+      },
+      {
         id: "index",
         index: true,
         handle: { title: "首页" },
@@ -26,11 +34,11 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        id: "login",
-        path: "login",
-        handle: { title: "登录" },
+        id: "input",
+        path: "input",
+        handle: { title: "Input" },
         lazy() {
-          return import("@/pages/login");
+          return import("@/pages/input");
         },
       },
     ],

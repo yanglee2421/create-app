@@ -10,16 +10,12 @@ import { QueryProvider } from "@/api/provider";
 // Toast Imports
 import { Toaster } from "react-hot-toast";
 
-// MUI Imports
-import { CssBaseline } from "@mui/material";
-
 export function App() {
   return (
     <ReduxProvider>
       <QueryProvider>
         <ThemeProvider>
           <Toaster />
-          <CssBaseline />
           <RouterProvider router={router} />
         </ThemeProvider>
       </QueryProvider>
