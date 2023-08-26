@@ -1,5 +1,15 @@
 // MUI Imports
-import { Grid, Card, CardContent, Box } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Box,
+  CardHeader,
+  TextareaAutosize,
+} from "@mui/material";
+
+// Theme Imports
+import { ThemeToggle } from "@/themes";
 
 export function Input() {
   return (
@@ -7,12 +17,17 @@ export function Input() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Card>
-            <CardContent></CardContent>
+            <CardHeader title="Assistant" />
+            <CardContent>
+              <TextareaAutosize />
+            </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Card>
-            <CardContent></CardContent>
+            <CardContent>
+              <ThemeToggle />
+            </CardContent>
           </Card>
         </Grid>
       </Grid>

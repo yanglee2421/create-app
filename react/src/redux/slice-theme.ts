@@ -8,6 +8,9 @@ export const sliceTheme = createSlice({
     isDark(state, { payload }: PayloadAction<boolean>) {
       state.isDark = payload;
     },
+    isDarkToggle(state) {
+      state.isDark = !state.isDark;
+    },
   },
 });
 
