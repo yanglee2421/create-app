@@ -1,15 +1,11 @@
 // MUI Imports
-import {
-  Grid,
-  Card,
-  CardContent,
-  Box,
-  CardHeader,
-  TextareaAutosize,
-} from "@mui/material";
+import { Grid, Card, CardContent, Box, CardHeader } from "@mui/material";
 
 // Theme Imports
 import { ThemeToggle } from "@/themes";
+
+// Components Imports
+import { InputTextarea } from "./input-textarea";
 
 export function Input() {
   return (
@@ -19,7 +15,7 @@ export function Input() {
           <Card>
             <CardHeader title="Assistant" />
             <CardContent>
-              <TextareaAutosize />
+              <InputTextarea />
             </CardContent>
           </Card>
         </Grid>
