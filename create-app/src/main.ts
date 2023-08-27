@@ -1,19 +1,13 @@
 // NodeJs Imports
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import {
-  copyFile,
-  readFile,
-  access,
-  readdir,
-  writeFile,
-  constants,
-  stat,
-  mkdir,
-} from "node:fs/promises";
+import { resolve } from "node:path";
 
 // Prompt Imports
 import prompts from "prompts";
+
+// Utils Imports
+import { copyDir } from "./copy-dir";
+import { editPackage } from "./edit-package";
+import { toIoPath } from "./to-io-path";
 
 init();
 
@@ -22,7 +16,7 @@ async function init() {
   handleFile(answer);
 }
 
-function prompt() {
+function prompt(): Promise<Answer> {
   return prompts([
     {
       type: "select",
@@ -39,86 +33,24 @@ function prompt() {
     },
   ]);
 }
+export interface Answer {
+  projectName: string;
+  framework: string;
+}
 
-async function handleFile(params: HandleFileParams) {
+async function handleFile(params: Answer) {
   // ** Params
   const { projectName } = params;
 
-  // Get filenames
+  // Get IO-Path With Answer
   const [input, output] = toIoPath(params);
 
-  // Copy Files
+  // Copy Files With IO-Path
   await copyDir({ input, output });
 
-  // Package.json
-  const packageJsonPath = resolve(output, "package.json");
-  const prevJson = await readFile(packageJsonPath, { encoding: "utf-8" });
-  const packageData = JSON.parse(prevJson);
-  packageData.name = projectName;
-  const nextJson = JSON.stringify(packageData, null, "\t");
-  await writeFile(packageJsonPath, nextJson, { encoding: "utf-8", flag: "w" });
-}
-interface HandleFileParams {
-  projectName: string;
-  framework: string;
-}
-
-async function copyDir(params: CopyDirParams) {
-  // ** Params
-  const { input, output } = params;
-
-  // Output must can be accessed
-  try {
-    await access(output, constants.R_OK);
-  } catch {
-    await mkdir(output);
-  }
-
-  // List Directory Contents
-  const list = await readdir(input);
-  for (const item of list) {
-    const neoInput = resolve(input, item);
-    const neoOutput = resolve(output, item);
-
-    const states = await stat(neoInput);
-    const isDir = states.isDirectory();
-
-    // Is Directoy
-    if (isDir) {
-      await copyDir({
-        input: neoInput,
-        output: neoOutput,
-      });
-      continue;
-    }
-
-    // Is File
-    await copyFile(neoInput, neoOutput);
-  }
-}
-interface CopyDirParams {
-  input: string;
-  output: string;
-}
-
-function toIoPath(params: ToIoPathParams): [string, string] {
-  // ** Params
-  const { projectName, framework } = params;
-
-  const __dirname = getDirname();
-  const inputBasePath = resolve(__dirname, "../templates");
-  const input = resolve(inputBasePath, framework);
-
-  const output = resolve(process.cwd(), projectName);
-  return [input, output];
-}
-interface ToIoPathParams {
-  projectName: string;
-  framework: string;
-}
-
-function getDirname() {
-  return fileURLToPath(dirname(import.meta.url));
+  // Edit Package.json
+  const jsonPath = resolve(output, "package.json");
+  editPackage({ jsonPath, name: projectName });
 }
 
 function getChoices(): prompts.Choice[] {
@@ -131,12 +63,12 @@ function getChoices(): prompts.Choice[] {
     {
       title: "React CRX",
       value: "react-crx",
-      description: "React + CRX",
+      description: "React for google chrome crx",
     },
     {
       title: "Vue Wordpress",
       value: "vue-wordpress",
-      description: "Vue Wordpress",
+      description: "Vue for wordpress plugins",
     },
   ];
 }
