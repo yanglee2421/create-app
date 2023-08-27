@@ -1,7 +1,7 @@
 {
-  "name": "create-app",
+  "name": "@yanglee2421/create-app",
   "version": "0.0.1",
-  "description": "create a app",
+  "description": "create a vite app",
   "type": "module",
   "scripts": {
     "dev": "unbuild --stub",
@@ -15,9 +15,11 @@
     "dist",
     "templates"
   ],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "vite"
+  ],
+  "author": "yanglee2421",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.5.6",
     "@types/prompts": "^2.4.4",
