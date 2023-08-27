@@ -1,0 +1,28 @@
+{
+  "name": "create-app",
+  "version": "0.0.1",
+  "description": "create a app",
+  "type": "module",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "typecheck": "tsc"
+  },
+  "bin": {
+    "create-app": "dist/main.mjs"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.6",
+    "@types/prompts": "^2.4.4",
+    "prompts": "^2.4.2",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0"
+  }
+}
