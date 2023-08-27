@@ -9,6 +9,7 @@ import {
   writeFile,
   constants,
   stat,
+  mkdir,
 } from "node:fs/promises";
 
 // Prompt Imports
@@ -18,7 +19,7 @@ init();
 
 async function init() {
   const answer = await prompt();
-  copyDir(answer);
+  handleFile(answer);
 }
 
 function prompt() {
@@ -39,38 +40,65 @@ function prompt() {
   ]);
 }
 
-async function copyDir(params: CopyDirParams) {
+async function handleFile(params: HandleFileParams) {
   // ** Params
   const { projectName } = params;
 
   // Get filenames
-  const [inputBasePath, outputBasePath] = toIoPath(params);
-  const files = await readdir(inputBasePath);
+  const [input, output] = toIoPath(params);
 
   // Copy Files
-  for (const file of files) {
-    const input = resolve(inputBasePath, file);
-    const src = await stat(input);
-    const isFile = src.isDirectory();
-    if (isFile) {
-      copyDir();
-    }
-
-    const output = resolve(outputBasePath, file);
-    await copyFile(input, output);
-  }
+  await copyDir({ input, output });
 
   // Package.json
-  const packageJsonPath = resolve(outputBasePath, "package.json");
+  const packageJsonPath = resolve(output, "package.json");
   const prevJson = await readFile(packageJsonPath, { encoding: "utf-8" });
   const packageData = JSON.parse(prevJson);
   packageData.name = projectName;
-  const nextJson = JSON.stringify(packageData);
+  const nextJson = JSON.stringify(packageData, null, "\t");
   await writeFile(packageJsonPath, nextJson, { encoding: "utf-8", flag: "w" });
 }
-interface CopyDirParams {
+interface HandleFileParams {
   projectName: string;
   framework: string;
+}
+
+async function copyDir(params: CopyDirParams) {
+  // ** Params
+  const { input, output } = params;
+
+  // Output must can be accessed
+  try {
+    await access(output, constants.R_OK);
+  } catch {
+    await mkdir(output);
+  }
+
+  // List Directory Contents
+  const list = await readdir(input);
+  for (const item of list) {
+    const neoInput = resolve(input, item);
+    const neoOutput = resolve(output, item);
+
+    const states = await stat(neoInput);
+    const isDir = states.isDirectory();
+
+    // Is Directoy
+    if (isDir) {
+      await copyDir({
+        input: neoInput,
+        output: neoOutput,
+      });
+      continue;
+    }
+
+    // Is File
+    await copyFile(neoInput, neoOutput);
+  }
+}
+interface CopyDirParams {
+  input: string;
+  output: string;
 }
 
 function toIoPath(params: ToIoPathParams): [string, string] {
