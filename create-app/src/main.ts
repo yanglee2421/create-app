@@ -56,9 +56,14 @@ async function handleFile(params: Answer) {
 function getChoices(): prompts.Choice[] {
   return [
     {
-      title: "React MUI",
+      title: "React with mui",
       value: "react-mui",
       description: "React + MUI",
+    },
+    {
+      title: "React with ant design",
+      value: "react-antd",
+      description: "React + Ant Design",
     },
     {
       title: "React CRX",
