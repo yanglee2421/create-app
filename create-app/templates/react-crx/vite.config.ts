@@ -9,14 +9,20 @@ import { resolve } from "node:path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), crx({ manifest: manifest() })],
+
+  // Path Alias
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
     },
   },
+
+  // Dev Server
   server: {
     port: 3003,
   },
+
+  // Build Config
   build: {
     rollupOptions: {
       input: {

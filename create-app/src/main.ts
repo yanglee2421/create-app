@@ -56,22 +56,22 @@ async function handleFile(params: Answer) {
 function getChoices(): prompts.Choice[] {
   return [
     {
-      title: "React with mui",
+      title: "react + mui",
       value: "react-mui",
-      description: "React + MUI",
+      description: "React with mui",
     },
     {
-      title: "React with ant design",
+      title: "react + antd",
       value: "react-antd",
-      description: "React + Ant Design",
+      description: "React with ant design",
     },
     {
-      title: "React CRX",
+      title: "react + crx",
       value: "react-crx",
       description: "React for google chrome crx",
     },
     {
-      title: "Vue Wordpress",
+      title: "vue + wordpress",
       value: "vue-wordpress",
       description: "Vue for wordpress plugins",
     },
