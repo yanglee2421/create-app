@@ -1,13 +1,13 @@
 {
   "name": "@yanglee2421/create-app",
   "version": "0.0.1",
-  "description": "create a vite app",
   "type": "module",
-  "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild",
-    "typecheck": "tsc"
-  },
+  "license": "MIT",
+  "author": "yanglee2421",
+  "description": "create a vite app",
+  "keywords": [
+    "vite"
+  ],
   "bin": {
     "create-app": "dist/main.mjs"
   },
@@ -15,11 +15,23 @@
     "dist",
     "templates"
   ],
-  "keywords": [
-    "vite"
-  ],
-  "author": "yanglee2421",
-  "license": "MIT",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "typecheck": "tsc"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanglee2421/vite-template.git",
+    "directory": "create-vite"
+  },
+  "bugs": {
+    "url": "https://github.com/yanglee2421/vite-template/issues"
+  },
+  "homepage": "https://github.com/yanglee2421/vite-template",
   "devDependencies": {
     "@types/node": "^20.5.6",
     "@types/prompts": "^2.4.4",
