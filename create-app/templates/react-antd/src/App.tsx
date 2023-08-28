@@ -6,7 +6,7 @@ import { QueryProvider } from "@/api/provider";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/routers";
 
-function App() {
+export function App() {
   return (
     <ReduxProvider>
       <QueryProvider>
@@ -15,5 +15,3 @@ function App() {
     </ReduxProvider>
   );
 }
-
-export default App;

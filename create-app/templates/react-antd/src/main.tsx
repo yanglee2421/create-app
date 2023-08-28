@@ -1,9 +1,7 @@
 // React Imports
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-// App Imports
-import App from "./App.tsx";
+import { App } from "./App.tsx";
 
 // I18n Imports
 import "@/i18n";

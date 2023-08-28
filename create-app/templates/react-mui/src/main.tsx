@@ -1,8 +1,6 @@
 // React Imports
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-// App Imports
 import { App } from "./App";
 
 // I18n Imports
