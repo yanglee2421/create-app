@@ -8,7 +8,7 @@ export function Home() {
   // Redux Hooks
   const dispatch = useAppDispatch();
   const handleSignOut = () => {
-    const action = sliceLogin.actions.islogged(false);
+    const action = sliceLogin.actions.usr(null);
     dispatch(action);
   };
 
