@@ -5,14 +5,22 @@ export const sliceLogin = createSlice({
   name: "login",
   initialState,
   reducers: {
-    islogged(state, { payload }: PayloadAction<boolean>) {
-      state.islogged = payload;
+    usr(state, { payload }: PayloadAction<Usr>) {
+      state.usr = payload;
     },
   },
 });
 
-function initialState() {
+function initialState(): State {
   return {
-    islogged: true,
+    usr: null,
   };
+}
+
+interface State {
+  usr: Usr | null;
+}
+
+interface Usr {
+  role: string;
 }

@@ -1,7 +1,7 @@
 // Redux Toolkit Imports
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const mutateLogin = createAsyncThunk<Login, Partial<Login>>(
+export const mutateLogin = createAsyncThunk<State, Partial<State>>(
   "login/mutate",
   async (payload) => {
     const { login } = await chrome.storage.sync.get("login");
@@ -19,8 +19,8 @@ export const sliceLogin = createSlice({
   name: "login",
   initialState,
   reducers: {
-    islogged(state, { payload }: PayloadAction<boolean>) {
-      state.isLogged = payload;
+    islogged(state, { payload }: PayloadAction<Usr | null>) {
+      state.usr = payload;
     },
   },
   extraReducers(builder) {
@@ -34,14 +34,18 @@ export const sliceLogin = createSlice({
   },
 });
 
-function initialState(): Login {
+function initialState(): State {
   return {
-    isLogged: false,
+    usr: null,
     isLoading: false,
   };
 }
 
-export interface Login {
-  isLogged: boolean;
+interface State {
+  usr: Usr | null;
   isLoading: boolean;
+}
+
+interface Usr {
+  role: string;
 }
