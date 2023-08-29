@@ -11,14 +11,17 @@ import { CssBaseline } from "@mui/material";
 // Provider Imports
 import { QueryProvider } from "@/api/provider";
 import { ReduxProvider } from "@/redux";
+import { AclProvider } from "@/configs/acl";
 
 export function OptionsPage() {
   return (
     <ReduxProvider>
       <QueryProvider>
-        <CssBaseline />
-        <Toaster />
-        <RouterProvider router={router} />
+        <AclProvider>
+          <CssBaseline />
+          <Toaster />
+          <RouterProvider router={router} />
+        </AclProvider>
       </QueryProvider>
     </ReduxProvider>
   );

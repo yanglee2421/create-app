@@ -1,6 +1,7 @@
 // Provider Imports
 import { ReduxProvider } from "@/redux";
 import { QueryProvider } from "@/api/provider";
+import { AclProvider } from "@/configs/acl";
 
 // Router Imports
 import { RouterProvider } from "react-router-dom";
@@ -10,7 +11,9 @@ export function App() {
   return (
     <ReduxProvider>
       <QueryProvider>
-        <RouterProvider router={router} />
+        <AclProvider>
+          <RouterProvider router={router} />
+        </AclProvider>
       </QueryProvider>
     </ReduxProvider>
   );
