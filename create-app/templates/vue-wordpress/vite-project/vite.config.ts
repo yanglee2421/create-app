@@ -8,11 +8,15 @@ import { resolve } from "node:path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+
+  // Path Alias
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
     },
   },
+
+  // CSS Config
   css: {
     preprocessorOptions: {
       scss: {
@@ -20,6 +24,7 @@ export default defineConfig({
       },
     },
   },
+
   base: "./",
   build: {
     outDir: "../dist",
