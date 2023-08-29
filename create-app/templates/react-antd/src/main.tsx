@@ -11,6 +11,7 @@ import "@/api/fakedb";
 
 // Styles Imports
 import "@/assets/scss/global.scss";
+import "@/assets/css/style.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
