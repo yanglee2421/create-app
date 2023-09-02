@@ -47,7 +47,7 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
         },
         entryFileNames: "assets/wp-vite-main.js",
         assetFileNames: "assets/[name][extname]",
-        chunkFileNames: "assets/[name]-[hast].js",
+        chunkFileNames: "assets/[name]-[hash].js",
       },
     },
   };
