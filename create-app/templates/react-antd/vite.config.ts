@@ -1,46 +1,77 @@
 // Vite Imports
-import { defineConfig } from "vite";
+import { ConfigEnv, defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
 // NodeJs Imports
 import { resolve } from "node:path";
+// import { readFileSync } from "node:fs";
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig((configEnv) => {
+  const { mode } = configEnv;
+  void mode;
 
-  // Path Alias
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "./src"),
-    },
-  },
+  return {
+    plugins: [react()],
 
-  // CSS Preprocessor
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additonalData: `@use "@yanglee2421/scss" as *;`,
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "./src"),
       },
     },
-  },
 
-  // ** Build
-  base: "/base",
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/scss" as *;`,
+        },
+      },
+      modules: {
+        localsConvention: "camelCaseOnly",
+      },
+    },
 
-  // Dev Server
-  server: {
-    port: 3004,
+    base: "/vite-react",
+    // envDir: resolve(__dirname, "./config"),
+    build: build(configEnv),
+    server: server(configEnv),
+  };
+});
+
+function build({ mode }: ConfigEnv): UserConfig["build"] {
+  void mode;
+
+  return {
+    outDir: "docs",
+    manifest: false,
+    chunkSizeWarningLimit: 1024,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          const isAntd = id.includes("node_modules/antd");
+          if (isAntd) return "antd";
+        },
+      },
+    },
+  };
+}
+
+function server({ mode }: ConfigEnv): UserConfig["server"] {
+  void mode;
+
+  return {
+    https: false,
+    fs: { allow: [".."] },
+    port: 3005,
     proxy: {
       "/dev": {
-        target: "https://exmple.com",
+        ws: true,
+        changeOrigin: true,
+        target: "http://127.0.0.1",
         rewrite(path) {
           return path.replace(/^\/dev/, "");
         },
-        ws: true,
-        changeOrigin: true,
-        secure: true,
       },
     },
-  },
-});
+  };
+}

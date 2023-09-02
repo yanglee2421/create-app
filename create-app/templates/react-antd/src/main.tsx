@@ -1,20 +1,35 @@
 // React Imports
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App.tsx";
+
+// App Imports
+import { App } from "./App";
+
+// Styles Imports
+import "antd/dist/reset.css";
+import "@/assets/scss/global.scss";
+import "@/assets/css/style.css";
 
 // I18n Imports
 import "@/i18n";
 
-// FakeDB Imports'
+// Fake Database Imports
 import "@/api/fakedb";
 
-// Styles Imports
-import "@/assets/scss/global.scss";
-import "@/assets/css/style.css";
+// HTML Element
+const el = document.querySelector("#root");
+bootstrap(el);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function bootstrap(el: Element | null) {
+  if (!el) {
+    console.error("Invalid Element");
+    return;
+  }
+
+  // React Root
+  ReactDOM.createRoot(el).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}

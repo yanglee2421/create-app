@@ -8,7 +8,7 @@ export function useDocTitle() {
   const matches = useMatches();
 
   return useEffect(() => {
-    const curr = matches[matches.length - 1];
+    const curr = matches.at(-1);
     if (!curr) return;
 
     const handle: any = curr.handle;

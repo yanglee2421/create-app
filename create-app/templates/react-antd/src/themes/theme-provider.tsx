@@ -12,10 +12,8 @@ export function ThemeProvider(props: React.PropsWithChildren) {
   // ** Props
   const { children } = props;
 
-  // Redux Hooks
-  const isDark = useAppSelector((s) => s.theme.isDark);
-
   // ** Theme
+  const isDark = useAppSelector((s) => s.theme.isDark);
   const { darkAlgorithm, defaultAlgorithm } = theme;
   const algorithm = isDark ? darkAlgorithm : defaultAlgorithm;
 

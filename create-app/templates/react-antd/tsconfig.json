@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "types": ["vite/client"],
+    "rootDir": "src",
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
 
-    // Initialized by vite
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    // Initialized by Vite
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
 

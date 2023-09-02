@@ -32,6 +32,7 @@ const reducer = persistReducer(
     key: "root",
     version: 1,
     storage,
+    blacklist: [sliceDemo.name],
   },
   rootReducer
 );

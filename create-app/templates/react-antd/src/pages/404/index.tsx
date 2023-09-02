@@ -1,7 +1,4 @@
-// Antd Imports
 import { Button, Result } from "antd";
-
-// Router Imports
 import { NavLink } from "react-router-dom";
 
 export function Component() {
