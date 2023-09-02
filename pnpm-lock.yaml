@@ -359,7 +359,7 @@ importers:
         specifier: ^4.4.5
         version: 4.4.9(@types/node@20.5.7)(sass@1.66.1)(terser@5.19.3)
 
-  create-app/templates/vue-wordpress/vite-project:
+  create-app/templates/vue-wordpress:
     dependencies:
       '@element-plus/icons-vue':
         specifier: ^2.1.0
@@ -371,13 +371,19 @@ importers:
         specifier: ^4.33.0
         version: 4.33.0
       '@tanstack/vue-query':
-        specifier: ^4.33.1
-        version: 4.34.0(vue@3.3.4)
+        specifier: ^4.34.3
+        version: 4.34.4(vue@3.3.4)
+      '@tinymce/tinymce-vue':
+        specifier: ^5.1.1
+        version: 5.1.1(vue@3.3.4)
       axios:
-        specifier: ^1.4.0
+        specifier: ^1.5.0
         version: 1.5.0
+      axios-mock-adapter:
+        specifier: ^1.21.5
+        version: 1.21.5(axios@1.5.0)
       element-plus:
-        specifier: ^2.3.9
+        specifier: ^2.3.12
         version: 2.3.12(vue@3.3.4)
       nprogress:
         specifier: ^0.2.0
@@ -396,19 +402,19 @@ importers:
         version: 4.2.4(vue@3.3.4)
     devDependencies:
       '@types/node':
-        specifier: ^20.5.1
+        specifier: ^20.5.7
         version: 20.5.7
       '@types/nprogress':
         specifier: ^0.2.0
         version: 0.2.0
       '@vitejs/plugin-vue':
-        specifier: ^4.2.3
+        specifier: ^4.3.4
         version: 4.3.4(vite@4.4.9)(vue@3.3.4)
       autoprefixer:
         specifier: ^10.4.15
         version: 10.4.15(postcss@8.4.29)
       postcss:
-        specifier: ^8.4.28
+        specifier: ^8.4.29
         version: 8.4.29
       sass:
         specifier: ^1.66.1
@@ -417,13 +423,13 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       typescript:
-        specifier: ^5.0.2
+        specifier: ^5.2.2
         version: 5.2.2
       vite:
-        specifier: ^4.4.5
+        specifier: ^4.4.9
         version: 4.4.9(@types/node@20.5.7)(sass@1.66.1)(terser@5.19.3)
       vue-tsc:
-        specifier: ^1.8.5
+        specifier: ^1.8.8
         version: 1.8.8(typescript@5.2.2)
 
   react-mui:
@@ -3145,8 +3151,8 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/vue-query@4.34.0(vue@3.3.4):
-    resolution: {integrity: sha512-jXqvP5z+9mAuUVELH4A9j+KYhu84IpBFDGo60Z+9GV/td+CeDBLRoijBEixBg87SEilCCpJugc0yx2MOCwlwew==}
+  /@tanstack/vue-query@4.34.4(vue@3.3.4):
+    resolution: {integrity: sha512-gX3Eh/u1DCzcrKkAKuMs6hldUOm/7uTHhnq9G6hhDsstQlNwAVCGlxKqRm97ydmioXA1Bg6O7akU9AgVqxymmg==}
     peerDependencies:
       '@vue/composition-api': ^1.1.2
       vue: ^2.5.0 || ^3.0.0
@@ -3171,6 +3177,15 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tinymce: 6.7.0
+    dev: false
+
+  /@tinymce/tinymce-vue@5.1.1(vue@3.3.4):
+    resolution: {integrity: sha512-iO57HOWesFOhsaqjA5Ea6sDvQBmJJH3/dq00Uvg7metlct2kLF+ctRgoDsetLt6gmeZ7COPftr814/XzqnJ/dg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      tinymce: 6.7.0
+      vue: 3.3.4
     dev: false
 
   /@types/estree@1.0.1:
