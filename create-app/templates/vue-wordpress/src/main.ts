@@ -11,11 +11,8 @@ import { plugin } from "@/plugins";
 import "@/assets/scss/global.scss";
 import "@/assets/css/style.css";
 
-// FakeDB Imports
+// FakeDB
 import "@/api/fakedb";
-
-// Vite Imports
-import "vite/modulepreload-polyfill";
 
 const app = createApp(App);
 app.use(plugin);
