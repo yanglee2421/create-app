@@ -1,9 +1,7 @@
 export { TinyMCE } from "./tiny-mce";
 
-// ** HOC
-export { withPortal } from "./with-portal";
-
-export { Counter } from "./Counter";
-
 // ** Form
 export * from "./item-radio";
+export * from "./item-text";
+export * from "./item-checkbox";
+export * from "./item-passwd";

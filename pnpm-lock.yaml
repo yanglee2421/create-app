@@ -422,12 +422,21 @@ importers:
 
   react-mui:
     dependencies:
+      '@casl/ability':
+        specifier: ^6.5.0
+        version: 6.5.0
+      '@casl/react':
+        specifier: ^3.1.0
+        version: 3.1.0(@casl/ability@6.5.0)(react@18.2.0)
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.2.21)(react@18.2.0)
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.21)(react@18.2.0)
+      '@fontsource/roboto':
+        specifier: ^5.0.8
+        version: 5.0.8
       '@hookform/resolvers':
         specifier: ^3.2.0
         version: 3.3.1(react-hook-form@7.45.4)
@@ -2434,6 +2443,10 @@ packages:
 
   /@floating-ui/utils@0.1.1:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
+    dev: false
+
+  /@fontsource/roboto@5.0.8:
+    resolution: {integrity: sha512-XxPltXs5R31D6UZeLIV1td3wTXU3jzd3f2DLsXI8tytMGBkIsGcc9sIyiupRtA8y73HAhuSCeweOoBqf6DbWCA==}
     dev: false
 
   /@hookform/resolvers@3.3.1(react-hook-form@7.45.4):
