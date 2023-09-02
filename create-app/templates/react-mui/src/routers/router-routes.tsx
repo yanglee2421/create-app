@@ -33,6 +33,14 @@ export const routes: RouteObject[] = [
           return import("@/pages/home");
         },
       },
+      {
+        id: "input",
+        path: "input",
+        handle: { title: "Input" },
+        lazy() {
+          return import("@/pages/input");
+        },
+      },
     ],
   },
 ];

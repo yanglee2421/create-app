@@ -1,68 +1,106 @@
-// Redux Imports
-import { sliceLogin, useAppDispatch } from "@/redux";
+// MUI Imports
+import {
+  Box,
+  Button,
+  Divider,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Link,
+  Typography,
+} from "@mui/material";
+import { Google, GitHub, FacebookOutlined, Twitter } from "@mui/icons-material";
 
 // Form Imports
-import { useForm, FormProvider } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { ItemEmail, ItemPassword, ItemIsRemember } from "./form-items";
+import { FormProvider, useForm } from "react-hook-form";
+
+// Components Imports
+import { ItemCheckbox, ItemPasswd, ItemText } from "@/components";
 
 export function Component() {
-  const dispatch = useAppDispatch();
-
-  const schema = getSchema();
-  const formReturn = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {},
-  });
-
-  // Submit & reset
-  const handleReset = () => formReturn.reset();
-  const handleSubmit = formReturn.handleSubmit((data) => {
-    console.log(data);
-    dispatch(sliceLogin.actions.islogged(true));
-  });
+  // Form Hooks
+  const formCtx = useForm({ defaultValues: {} });
 
   return (
-    <div className="h-100">
-      <form onSubmit={handleSubmit} onReset={handleReset} noValidate>
-        <FormProvider {...formReturn}>
-          <ItemEmail name={"email"}></ItemEmail>
-          <ItemPassword name={"passwd"}></ItemPassword>
-          <ItemIsRemember name={"isRemember"}></ItemIsRemember>
-        </FormProvider>
-        <div>
-          <button type="submit">login</button>
-          <button type="reset">reset</button>
-        </div>
-      </form>
-    </div>
+    <Box display={"flex"} height={"100%"}>
+      <Box flex={1}></Box>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        width={"100%"}
+        maxWidth={["none", 450]}
+        paddingX={4}
+        boxShadow={(theme) => theme.shadows[1]}
+      >
+        <form action="">
+          <FormProvider {...formCtx}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h5" fontWeight={500}>
+                  Wellcome to Yang_Lee!
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography color={"GrayText"}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+                  omnis sed fugiat placeat alias illo praesentium.
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <ItemText name="email" label="Email" />
+              </Grid>
+              <Grid item xs={12}>
+                <ItemPasswd name="passwd" label="Password" />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                display={"flex"}
+                justifyContent={"space-between"}
+              >
+                <FormControlLabel
+                  control={<ItemCheckbox name="remember" />}
+                  label="Remember Me"
+                />
+                <Link component="button">Forgot Password?</Link>
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" fullWidth size="large">
+                  sign in
+                </Button>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                display={"flex"}
+                justifyContent={"center"}
+                gap={2}
+              >
+                <Typography>New on our platform?</Typography>
+                <Link component={"button"}>Create an account</Link>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider>Or</Divider>
+              </Grid>
+              <Grid item xs={12} display={"flex"} justifyContent={"center"}>
+                <IconButton>
+                  <FacebookOutlined />
+                </IconButton>
+                <IconButton>
+                  <Twitter />
+                </IconButton>
+                <IconButton>
+                  <GitHub />
+                </IconButton>
+                <IconButton>
+                  <Google />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </FormProvider>
+        </form>
+      </Box>
+    </Box>
   );
-}
-
-// Validate fields rules
-function getSchema() {
-  return yup.object().shape({
-    email: yup
-      .string()
-      .required()
-      .email()
-      .max(30)
-      .test((v, { createError }) => {
-        if (v === "yanglee2421@gmail.com") return true;
-        return createError({ message: "Email不正确" });
-      }),
-    passwd: yup
-      .string()
-      .required()
-      .max(16)
-      .test((v, { createError }) => {
-        if (v === "admin") return true;
-        return createError({ message: "密码不正确" });
-      }),
-    isRemember: yup.boolean().test((v, { createError }) => {
-      if (v) return true;
-      return createError({ message: "不记住你登nm" });
-    }),
-  });
 }
