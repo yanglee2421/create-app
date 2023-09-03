@@ -12,7 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage/session";
+import storage from "redux-persist/lib/storage";
 
 // Slice Imports
 import { sliceLogin } from "./slice-login";
@@ -32,6 +32,11 @@ const reducer = persistReducer(
     key: "root",
     version: 1,
     storage,
+    blacklist: [sliceDemo.name],
+    async migrate(state) {
+      if (state) return state;
+      return void 0;
+    },
   },
   rootReducer
 );
