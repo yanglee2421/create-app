@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 
 // React Imports
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 // Login Imports
 import { useLogin } from "@/hooks";
@@ -110,10 +110,24 @@ export function Component() {
   // Login Hooks
   const { signOut } = useLogin();
 
+  const [unCollapsed, setCollapsed] = useState(false);
+
   return (
     <Box display={"flex"} height={"100%"}>
-      <Collapse in={true} collapsedSize={40} orientation="horizontal">
-        1531351
+      <Collapse
+        in={unCollapsed}
+        onMouseOver={() => {
+          setCollapsed(true);
+        }}
+        onMouseOut={() => {
+          setCollapsed(false);
+        }}
+        collapsedSize={68}
+        orientation="horizontal"
+      >
+        <Box width={260} border={"1px red solid"}>
+          menu
+        </Box>
       </Collapse>
       <Box flex={1}>
         <ThemeToggle />
