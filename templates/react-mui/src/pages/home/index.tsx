@@ -6,7 +6,6 @@ import {
   IconButton,
   ButtonGroup,
   Box,
-  Collapse,
 } from "@mui/material";
 import {
   ArrowBackIosNewRounded,
@@ -21,6 +20,9 @@ import { useLogin } from "@/hooks";
 
 // Theme Imports
 import { ThemeToggle } from "@/themes";
+
+// Components Imports
+import { MenuDrawer } from "@/components";
 
 const UlStyled = styled("ul")(({ theme }) => {
   return {
@@ -114,7 +116,7 @@ export function Component() {
 
   return (
     <Box display={"flex"} height={"100%"}>
-      <Collapse
+      {/* <Collapse
         in={unCollapsed}
         onMouseOver={() => {
           setCollapsed(true);
@@ -128,7 +130,21 @@ export function Component() {
         <Box width={260} border={"1px red solid"}>
           menu
         </Box>
-      </Collapse>
+      </Collapse> */}
+      <MenuDrawer
+        open={unCollapsed}
+        onMouseOver={() => {
+          setCollapsed(true);
+        }}
+        onMouseOut={() => {
+          setCollapsed(false);
+        }}
+        variant="permanent"
+      >
+        123
+        <Divider />
+        789
+      </MenuDrawer>
       <Box flex={1}>
         <ThemeToggle />
         <Button onClick={signOut} variant="contained" color="error">
@@ -145,6 +161,7 @@ export function Component() {
         </IconButton>
         <Divider>Divider</Divider>
         <ButtonGroup>{dotEl}</ButtonGroup>
+        MenuDrawer
       </Box>
     </Box>
   );
