@@ -5,6 +5,8 @@ import {
   Button,
   IconButton,
   ButtonGroup,
+  Box,
+  Collapse,
 } from "@mui/material";
 import {
   ArrowBackIosNewRounded,
@@ -109,22 +111,27 @@ export function Component() {
   const { signOut } = useLogin();
 
   return (
-    <div>
-      <ThemeToggle />
-      <Button onClick={signOut} variant="contained" color="error">
-        log out
-      </Button>
-      <Divider>Divider</Divider>
-      <UlStyled ref={ulRef}>{liEl}</UlStyled>
-      <Divider>Divider</Divider>
-      <IconButton onClick={handlePrevClick}>
-        <ArrowBackIosNewRounded />
-      </IconButton>
-      <IconButton onClick={handleNextClick}>
-        <ArrowForwardIosRounded />
-      </IconButton>
-      <Divider>Divider</Divider>
-      <ButtonGroup>{dotEl}</ButtonGroup>
-    </div>
+    <Box display={"flex"} height={"100%"}>
+      <Collapse in={true} collapsedSize={40} orientation="horizontal">
+        1531351
+      </Collapse>
+      <Box flex={1}>
+        <ThemeToggle />
+        <Button onClick={signOut} variant="contained" color="error">
+          log out
+        </Button>
+        <Divider>Divider</Divider>
+        <UlStyled ref={ulRef}>{liEl}</UlStyled>
+        <Divider>Divider</Divider>
+        <IconButton onClick={handlePrevClick}>
+          <ArrowBackIosNewRounded />
+        </IconButton>
+        <IconButton onClick={handleNextClick}>
+          <ArrowForwardIosRounded />
+        </IconButton>
+        <Divider>Divider</Divider>
+        <ButtonGroup>{dotEl}</ButtonGroup>
+      </Box>
+    </Box>
   );
 }
