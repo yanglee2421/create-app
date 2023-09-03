@@ -7,7 +7,7 @@ export function toThemeValue(params: ToThemeValueParams) {
 
   return createTheme({
     palette: {
-      mode: isDark ? "dark" : void 0,
+      mode: isDark ? "dark" : "light",
       primary: {
         main: blue[500],
       },

@@ -1,11 +1,24 @@
-// Redux Imports
-import { useAppDispatch, sliceLogin } from "@/redux";
-
 // MUI Imports
-import { styled } from "@mui/material";
+import {
+  Divider,
+  styled,
+  Button,
+  IconButton,
+  ButtonGroup,
+} from "@mui/material";
+import {
+  ArrowBackIosNewRounded,
+  ArrowForwardIosRounded,
+} from "@mui/icons-material";
 
 // React Imports
 import { useMemo, useRef } from "react";
+
+// Login Imports
+import { useLogin } from "@/hooks";
+
+// Theme Imports
+import { ThemeToggle } from "@/themes";
 
 const UlStyled = styled("ul")(({ theme }) => {
   return {
@@ -36,12 +49,6 @@ const UlStyled = styled("ul")(({ theme }) => {
 });
 
 export function Component() {
-  const dispatch = useAppDispatch();
-  const handleLoggout = () => {
-    const action = sliceLogin.actions.islogged(false);
-    dispatch(action);
-  };
-
   const count = 5;
   const liEl = useMemo(() => {
     const list = [];
@@ -69,7 +76,11 @@ export function Component() {
         });
       };
 
-      return <button onClick={handleDotClick}>dix-{item}</button>;
+      return (
+        <Button key={item} onClick={handleDotClick}>
+          dix-{item}
+        </Button>
+      );
     });
   }, [count]);
 
@@ -94,16 +105,26 @@ export function Component() {
     });
   };
 
+  // Login Hooks
+  const { signOut } = useLogin();
+
   return (
     <div>
-      <button onClick={handleLoggout}>log out</button>
-      <hr />
+      <ThemeToggle />
+      <Button onClick={signOut} variant="contained" color="error">
+        log out
+      </Button>
+      <Divider>Divider</Divider>
       <UlStyled ref={ulRef}>{liEl}</UlStyled>
-      <hr />
-      <button onClick={handlePrevClick}>prev</button>
-      <button onClick={handleNextClick}>next</button>
-      <hr />
-      {dotEl}
+      <Divider>Divider</Divider>
+      <IconButton onClick={handlePrevClick}>
+        <ArrowBackIosNewRounded />
+      </IconButton>
+      <IconButton onClick={handleNextClick}>
+        <ArrowForwardIosRounded />
+      </IconButton>
+      <Divider>Divider</Divider>
+      <ButtonGroup>{dotEl}</ButtonGroup>
     </div>
   );
 }

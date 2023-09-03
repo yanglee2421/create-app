@@ -10,16 +10,46 @@ import {
   Typography,
 } from "@mui/material";
 import { Google, GitHub, FacebookOutlined, Twitter } from "@mui/icons-material";
+import { LoadingButton } from "@mui/lab";
 
 // Form Imports
 import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 // Components Imports
 import { ItemCheckbox, ItemPasswd, ItemText } from "@/components";
 
+// Login Imports
+import { useLogin, useUsrPost } from "@/hooks";
+
 export function Component() {
   // Form Hooks
-  const formCtx = useForm({ defaultValues: {} });
+  const formCtx = useForm({
+    defaultValues: {
+      email: "",
+      passwd: "",
+      isRemember: false,
+    },
+    resolver: yupResolver(
+      yup.object().shape({
+        email: yup.string().email().max(50).required(),
+        passwd: yup.string().min(8).max(16).required(),
+        isRemember: yup.boolean(),
+      })
+    ),
+  });
+
+  // Login Hooks
+  const { signIn } = useLogin();
+  const { mutateAsync, isLoading } = useUsrPost();
+
+  // Submit & Reset
+  const handleSubmit = formCtx.handleSubmit(async (data) => {
+    console.log(data);
+    const usr = await mutateAsync({ data });
+    signIn({ ...usr, role: "admin" });
+  });
 
   return (
     <Box display={"flex"} height={"100%"}>
@@ -33,7 +63,7 @@ export function Component() {
         paddingX={4}
         boxShadow={(theme) => theme.shadows[1]}
       >
-        <form action="">
+        <form onSubmit={handleSubmit} noValidate autoComplete="off">
           <FormProvider {...formCtx}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -66,9 +96,15 @@ export function Component() {
                 <Link component="button">Forgot Password?</Link>
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" fullWidth size="large">
+                <LoadingButton
+                  loading={isLoading}
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                >
                   sign in
-                </Button>
+                </LoadingButton>
               </Grid>
               <Grid
                 item

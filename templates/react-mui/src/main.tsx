@@ -14,6 +14,9 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+// FakeDB Imports
+import "@/api/fakedb";
+
 // HTML Element
 const el = document.querySelector("#root");
 bootstrap(el);

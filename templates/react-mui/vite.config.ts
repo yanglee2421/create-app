@@ -1,7 +1,6 @@
 // Vite Imports
 import { ConfigEnv, defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import legacy from "@vitejs/plugin-legacy";
 
 // NodeJs Imports
 import { resolve } from "node:path";
@@ -11,16 +10,34 @@ export default defineConfig((configEnv) => {
   void configEnv;
 
   return {
-    plugins: [react(), legacy()],
+    plugins: [react()],
 
+    // Path Alias
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src"),
       },
     },
 
+    // ** CSS
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/scss" as *;`,
+        },
+      },
+      modules: {
+        localsConvention: "camelCaseOnly",
+      },
+    },
+
+    // Base URL
     base: "/react",
+
+    // ** Build
     build: build(configEnv),
+
+    // DEV Server
     server: server(configEnv),
   };
 });
@@ -36,8 +53,8 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
 
   return {
     https: false,
-    fs: { allow: [".."] },
-    port: 5173,
+    fs: { allow: [resolve(__dirname, "../../")] },
+    port: 3007,
     proxy: {
       "/dev": {
         ws: true,

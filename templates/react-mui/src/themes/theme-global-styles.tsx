@@ -1,27 +1,42 @@
 // MUI Imports
-import { GlobalStyles, GlobalStylesProps } from "@mui/material";
-import { red } from "@mui/material/colors";
+import {
+  GlobalStyles,
+  GlobalStylesProps,
+  Theme,
+  useTheme,
+} from "@mui/material";
 
 export function ThemeGlobalStyles() {
-  return <GlobalStyles styles={getGlobalStyles()} />;
+  // Theme Hooks
+  const theme = useTheme();
+
+  return <GlobalStyles styles={getGlobalStyles(theme)} />;
 }
 
-function getGlobalStyles(): GlobalStylesProps["styles"] {
+function getGlobalStyles(theme: Theme): GlobalStylesProps["styles"] {
+  // Dark Mode
+  const isDark = theme.palette.mode === "dark";
+
+  // Nprogress Bar
+  const nprogressBarBg = isDark
+    ? theme.palette.primary.dark
+    : theme.palette.primary.light;
+
   return {
-    // Ngrogress
+    // Ngrogress Bar
     "#nprogress .bar": {
       position: "fixed",
       left: 0,
       top: 0,
-      zIndex: 2000,
+      zIndex: theme.zIndex.appBar + 1,
 
       width: "100%",
       height: 3,
 
-      backgroundColor: red[500],
+      backgroundColor: nprogressBarBg,
     },
 
-    // React Root Node
+    // React Root Element
     "#root": {
       height: "100%",
     },

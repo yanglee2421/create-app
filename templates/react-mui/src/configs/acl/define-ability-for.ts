@@ -9,7 +9,7 @@ import {
 const createAppAbility = createMongoAbility as CreateAbility<AppAbility>;
 
 export function defineAbilityFor(role: string) {
-  const { can, build } = new AbilityBuilder(createAppAbility);
+  const { can, cannot, build } = new AbilityBuilder(createAppAbility);
 
   switch (role) {
     case "admin":
@@ -20,11 +20,14 @@ export function defineAbilityFor(role: string) {
       // @ts-ignore
       can("read", "all");
       break;
+    default:
+      // @ts-ignore
+      cannot("manage", "all");
   }
 
   return build();
 }
 
+export type AppAbility = MongoAbility<Abilities>;
 type CRUD = "create" | "read" | "update" | "delete";
 type Abilities = ["read", "User"] | [CRUD, "Article"];
-export type AppAbility = MongoAbility<Abilities>;
