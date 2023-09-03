@@ -32,7 +32,7 @@ export default defineConfig((configEnv) => {
     },
 
     // Base URL
-    base: "/react",
+    base: "/mui",
 
     // ** Build
     build: build(configEnv),

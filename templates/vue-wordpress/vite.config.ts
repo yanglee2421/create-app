@@ -26,7 +26,11 @@ export default defineConfig((ConfigEnv) => ({
 
   base: "./",
   // envDir: resolve(__dirname, "./config"),
+
+  // ** Build
   build: build(ConfigEnv),
+
+  // DEV Server
   server: server(ConfigEnv),
 }));
 
@@ -58,8 +62,8 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
 
   return {
     https: false,
-    fs: { allow: ["./"] },
-    port: 3006,
+    fs: { allow: [resolve(__dirname, "../../")] },
+    port: 3008,
     proxy: {
       "/dev": {
         ws: true,

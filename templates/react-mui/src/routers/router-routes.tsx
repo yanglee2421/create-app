@@ -41,6 +41,14 @@ export const routes: RouteObject[] = [
           return import("@/pages/input");
         },
       },
+      {
+        id: "menu",
+        path: "menu",
+        handle: { title: "Menu" },
+        lazy() {
+          return import("@/pages/menu");
+        },
+      },
     ],
   },
 ];
