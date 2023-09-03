@@ -8,6 +8,7 @@ import prompts from "prompts";
 import { copyDir } from "./copy-dir";
 import { editPackage } from "./edit-package";
 import { toIoPath } from "./to-io-path";
+import { editGitignore } from "./edit-gitignore";
 
 init();
 
@@ -48,9 +49,13 @@ async function handleFile(params: Answer) {
   // Copy Files With IO-Path
   await copyDir({ input, output });
 
-  // Edit Package.json
+  // Edit package.json
   const jsonPath = resolve(output, "package.json");
   editPackage({ jsonPath, name: projectName });
+
+  // Edit .gitignore
+  const filePath = resolve(output, "_gitignore");
+  editGitignore({ filePath });
 }
 
 function getChoices(): prompts.Choice[] {
