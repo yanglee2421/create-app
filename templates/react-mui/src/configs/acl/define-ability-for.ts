@@ -13,15 +13,12 @@ export function defineAbilityFor(role: string) {
 
   switch (role) {
     case "admin":
-      // @ts-ignore
       can("manage", "all");
       break;
     case "client":
-      // @ts-ignore
       can("read", "all");
       break;
     default:
-      // @ts-ignore
       cannot("manage", "all");
   }
 
@@ -30,4 +27,6 @@ export function defineAbilityFor(role: string) {
 
 export type AppAbility = MongoAbility<Abilities>;
 type CRUD = "create" | "read" | "update" | "delete";
-type Abilities = ["read", "User"] | [CRUD, "Article"];
+type Abilities =
+  | ["read" | "manage", "User" | "all"]
+  | [CRUD | "manage", "Article" | "all"];

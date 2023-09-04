@@ -1,7 +1,6 @@
 // MUI Imports
 import {
   Box,
-  Button,
   Divider,
   FormControlLabel,
   Grid,
@@ -48,7 +47,7 @@ export function Component() {
   const handleSubmit = formCtx.handleSubmit(async (data) => {
     console.log(data);
     const usr = await mutateAsync({ data });
-    signIn({ ...usr, role: "admin" });
+    signIn({ ...usr, role: "admin", loginAt: 0 });
   });
 
   return (
