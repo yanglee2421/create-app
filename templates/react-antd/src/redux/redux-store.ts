@@ -33,10 +33,6 @@ const reducer = persistReducer(
     version: 1,
     storage,
     blacklist: [sliceDemo.name],
-    async migrate(state) {
-      if (state) return state;
-      return void 0;
-    },
   },
   rootReducer
 );

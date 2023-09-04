@@ -24,5 +24,5 @@ interface State {
 export interface Usr {
   role: string;
   email: string;
-  loginAt: string;
+  loginAt: number;
 }
