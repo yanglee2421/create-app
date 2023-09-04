@@ -33,10 +33,6 @@ const reducer = persistReducer(
     version: 1,
     storage,
     blacklist: [sliceDemo.name],
-    async migrate(state) {
-      if (state) return state;
-      return void 0;
-    },
   },
   rootReducer
 );
@@ -58,5 +54,5 @@ export const persistor = persistStore(store);
 
 // ** Types
 type RootReducer = typeof rootReducer;
-export type RootState = RootReducer extends Reducer<infer R> ? R : unknown;
+export type RootState = RootReducer extends Reducer<infer R, any> ? R : unknown;
 export type AppDispatch = typeof store.dispatch;
