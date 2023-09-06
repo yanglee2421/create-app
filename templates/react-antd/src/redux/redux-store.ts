@@ -12,27 +12,36 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import local from "redux-persist/lib/storage";
+import session from "redux-persist/lib/storage/session";
 
 // Slice Imports
-import { sliceLogin } from "./slice-login";
+import { sliceLoginLocal } from "./slice-login-local";
+import { sliceLoginSession } from "./slice-login-session";
 import { sliceTheme } from "./slice-theme";
 import { sliceDemo } from "./slice-demo";
 
 // Create Reducer
 const rootReducer = combineReducers({
-  [sliceLogin.name]: sliceLogin.reducer,
-  [sliceTheme.name]: sliceTheme.reducer,
   [sliceDemo.name]: sliceDemo.reducer,
+  [sliceTheme.name]: sliceTheme.reducer,
+  [sliceLoginLocal.name]: sliceLoginLocal.reducer,
+  [sliceLoginSession.name]: persistReducer(
+    {
+      key: sliceLoginSession.name,
+      storage: session,
+      blacklist: [],
+    },
+    sliceLoginSession.reducer
+  ),
 });
 
 // Create Persisted Reducer
 const reducer = persistReducer(
   {
     key: "root",
-    version: 1,
-    storage,
-    blacklist: [sliceDemo.name],
+    storage: local,
+    blacklist: [sliceLoginSession.name, sliceDemo.name],
   },
   rootReducer
 );

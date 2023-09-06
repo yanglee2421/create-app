@@ -1,10 +1,3 @@
-// Styles Imports
-import styles from "./home.module.scss";
-import clsx from "clsx";
-
-// Redux Imports
-import { useAppSelector } from "@/redux";
-
 // Antd Imports
 import { Typography, Layout, Button } from "antd";
 
@@ -17,10 +10,9 @@ import { useAcl } from "@/configs/acl";
 // Login Imports
 import { useLogin } from "@/hooks";
 
-export const Home = () => {
+export function Home() {
   // Redux Hooks
-  const usr = useAppSelector((s) => s.login.usr);
-  console.log(usr);
+  const { usr } = useLogin();
 
   // Acl Hooks
   const acl = useAcl();
@@ -29,18 +21,23 @@ export const Home = () => {
   const { signOut } = useLogin();
 
   return (
-    <Layout className={clsx(styles.home)}>
+    <Layout className="h-full">
       <div>
         <ThemeToggle />
         <Button onClick={signOut} type="primary" danger>
           Sign Out
         </Button>
       </div>
-      <Typography.Title>home</Typography.Title>
+      <Typography.Title className="bg-left-bottom bg-no-repeat bg-gradient-to-r from-sky-500 to-indigo-500 bg-[length:0_2px] hover:bg-[length:100%_2px] transition-all">
+        home
+      </Typography.Title>
+      <p>{usr?.email}</p>
+      <p>{usr?.role}</p>
+      <p>{usr?.loginAt}</p>
       <Typography.Text>{usr?.role}</Typography.Text>
       {acl.can("create", "Article") && (
-        <Typography.Text>You have persisi</Typography.Text>
+        <Typography.Text>You are admin</Typography.Text>
       )}
     </Layout>
   );
-};
+}

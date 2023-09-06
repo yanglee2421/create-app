@@ -33,8 +33,10 @@ export default defineConfig((configEnv) => {
       },
     },
 
-    base: "/antd",
-    // envDir: resolve(__dirname, "./config"),
+    base: "/react-antd",
+
+    // ENV File
+    envDir: resolve(__dirname, "./"),
 
     // ** Build
     build: build(configEnv),

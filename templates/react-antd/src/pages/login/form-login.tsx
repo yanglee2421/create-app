@@ -26,7 +26,8 @@ export function FormLogin(props: FormLoginProps) {
   // Form Submit
   const handleSubmit = async (data: FormValues) => {
     const usr = await mutateAsync({ data });
-    signIn(usr);
+
+    signIn(usr, data.remember);
   };
 
   return (
@@ -60,4 +61,5 @@ export interface FormLoginProps {}
 export interface FormValues {
   email: string;
   passwd: string;
+  remember: boolean;
 }
