@@ -4,22 +4,23 @@ import { routes } from "./router-routes";
 import { toIsWhitelist } from "./router-whitelist";
 
 // Hooks Imports
-import { useStoreLogin } from "@/hooks";
+import { useLogin } from "@/hooks";
 
 // Nprogress Imports
 import NProgress from "nprogress";
+import { unref } from "vue";
 // import "nprogress/nprogress.css";
 
 const history = createWebHashHistory();
 
 export const router = createRouter({ history, routes });
 
+// Router Guard
 router.beforeEach((to) => {
-  NProgress.start();
-
   // Pinia Hooks
-  const { state } = useStoreLogin();
-  const isLogined = state.usr;
+  const { usr } = useLogin();
+
+  const isLogined = unref(usr);
   const nextName = String(to.name);
 
   // To Login
@@ -37,10 +38,17 @@ router.beforeEach((to) => {
   // Has Logged
   return true;
 });
-router.afterEach((to) => {
-  NProgress.done();
 
-  // ** Title
+// ** Title
+router.afterEach((to) => {
   const title = to.meta.title;
   if (typeof title === "string") document.title = title;
+});
+
+// ** Nprogress
+router.beforeEach(() => {
+  NProgress.start();
+});
+router.afterEach(() => {
+  NProgress.done();
 });
