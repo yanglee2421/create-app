@@ -1,10 +1,8 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-type Dispatch = (state: State) => void;
-
-export const useStoreLogin = defineStore(
-  "login",
+export const useStoreLoginLocal = defineStore(
+  "login-local",
   () => {
     // State && Dispatch
     const state = reactive<State>({
@@ -24,6 +22,8 @@ export const useStoreLogin = defineStore(
   }
 );
 
+type Dispatch = (state: State) => void;
+
 interface State {
   usr: Usr | null;
 }
@@ -31,4 +31,5 @@ interface State {
 export interface Usr {
   role: string;
   email: string;
+  loginAt: string;
 }

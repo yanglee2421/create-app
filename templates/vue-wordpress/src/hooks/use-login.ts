@@ -15,7 +15,7 @@ import { nextTick } from "vue";
 // Element Imports
 import { ElMessage } from "element-plus";
 
-export function useLogin() {
+export function useLoginLocal() {
   // Router Hooks
   const router = useRouter();
   const route = useRoute();
