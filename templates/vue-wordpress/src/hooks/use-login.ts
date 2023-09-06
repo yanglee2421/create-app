@@ -1,69 +1,62 @@
 // Store Imports
 import { useStoreLogin, Usr } from "./use-store-login";
 
-// Router Imports
-import {
-  useRouter,
-  useRoute,
-  LocationQueryValue,
-  RouteLocationRaw,
-} from "vue-router";
+// API Imports
+import { useQueryClient } from "@tanstack/vue-query";
 
-// Vue Imports
-import { nextTick } from "vue";
-
-// Element Imports
-import { ElMessage } from "element-plus";
-
-export function useLoginLocal() {
-  // Router Hooks
-  const router = useRouter();
-  const route = useRoute();
-
+export function useLogin() {
   // Store Hooks
-  const { state, setState } = useStoreLogin();
+  const { session, setSession, local, setLocal } = useStoreLogin();
+
+  const state = local || session;
 
   // Sign In
-  const signIn = async (data: Usr) => {
+  const signIn = async (data: Usr, remember?: boolean) => {
+    // ** Local
+    if (remember) {
+      setLocal((state) => {
+        state.usr = data;
+      });
+      return;
+    }
+
     // Change Store
-    setState((state) => {
+    setSession((state) => {
       state.usr = data;
     });
-
-    // Change Router
-    await nextTick();
-    const homeRoute = toHomeRoute(route.query.returnUrl);
-    await router.push(homeRoute);
-
-    // Show Toast
-    ElMessage.closeAll();
-    ElMessage.success("Wellcome back!");
   };
+
+  // API Hooks
+  const queryClient = useQueryClient();
 
   // Sign Out
   const signOut = async () => {
-    // Change Store
-    setState((state) => {
+    // Clear Store
+    setSession((state) => {
+      state.usr = null;
+    });
+    setLocal((state) => {
       state.usr = null;
     });
 
-    // Change Router
-    await nextTick();
-    await router.push({ name: "login" });
-
-    // Show Toast
-    ElMessage.closeAll();
-    ElMessage.success("Sign Out Successlly!");
+    // Clear Query
+    queryClient.clear();
   };
 
-  return { signIn, signOut, state };
-}
+  // Update User
+  const updateUsr = (usr: Partial<Usr>) => {
+    // ** Session
+    setSession((prev) => {
+      if (!prev) return;
+      Object.assign(prev, usr);
+    });
 
-function toHomeRoute(params: ToHomeRouteParams): RouteLocationRaw {
-  if (Array.isArray(params)) {
-    return { name: "home" };
-  }
-  if (!params) return { name: "home" };
-  return { path: decodeURIComponent(params) };
+    // ** Local
+    setLocal((prev) => {
+      if (!prev) return;
+      Object.assign(prev, usr);
+    });
+  };
+
+  return { signIn, signOut, updateUsr, state };
 }
-type ToHomeRouteParams = LocationQueryValue | LocationQueryValue[];

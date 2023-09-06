@@ -27,8 +27,8 @@ defineOptions({ inheritAttrs: false });
   <div class="flex h-full">
     <div class="flex-1"></div>
 
-    <div class="w-full md:max-w-lg">
-      <el-card class="flex flex-col justify-center h-full px-3">
+    <div class="w-full sm:max-w-sm">
+      <el-card class="flex flex-col justify-center h-full px-1">
         <el-text
           tag="h1"
           size="large"
