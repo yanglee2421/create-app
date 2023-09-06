@@ -11,12 +11,11 @@ import { useQueryClient } from "@tanstack/vue-query";
 import {} from "vue";
 
 // Router Imports
-import {
-  useRouter,
-  useRoute,
-  RouteLocationRaw,
-  LocationQueryValue,
-} from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { toHomeRoute } from "@/router/to-home-route";
+
+// Toast Imports
+import { ElMessage } from "element-plus";
 
 export function useLogin() {
   // Store Hooks
@@ -48,9 +47,14 @@ export function useLogin() {
         break;
     }
 
+    // ** Router
     await nextTick();
     const homeRoute = toHomeRoute(route.query.returnUrl);
     await router.push(homeRoute);
+
+    // ** Toast
+    ElMessage.closeAll();
+    ElMessage.success("Wellcome back!");
   };
 
   // API Hooks
@@ -71,18 +75,23 @@ export function useLogin() {
 
     await nextTick();
     await router.push({ name: "login" });
+
+    ElMessage.closeAll();
+    ElMessage.success("Goodbye my friend!");
   };
 
   // Update User
   const updateUsr = (usr: Partial<Usr>) => {
     // ** Session
-    setSession((prev) => {
+    setSession((state) => {
+      const prev = state.usr;
       if (!prev) return;
       Object.assign(prev, usr);
     });
 
     // ** Local
-    setLocal((prev) => {
+    setLocal((state) => {
+      const prev = state.usr;
       if (!prev) return;
       Object.assign(prev, usr);
     });
@@ -90,12 +99,3 @@ export function useLogin() {
 
   return { signIn, signOut, updateUsr, usr };
 }
-
-export function toHomeRoute(params: ToHomeRouteParams): RouteLocationRaw {
-  if (Array.isArray(params)) {
-    return { name: "home" };
-  }
-  if (!params) return { name: "home" };
-  return { path: decodeURIComponent(params) };
-}
-type ToHomeRouteParams = LocationQueryValue | LocationQueryValue[];

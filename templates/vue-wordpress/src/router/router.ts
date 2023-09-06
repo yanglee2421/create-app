@@ -2,6 +2,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { routes } from "./router-routes";
 import { toIsWhitelist } from "./router-whitelist";
+import { toHomeRoute } from "./to-home-route";
 
 // Hooks Imports
 import { useLogin } from "@/hooks";
@@ -25,7 +26,9 @@ router.beforeEach((to) => {
 
   // To Login
   const isInLogin = nextName === "login";
-  if (isInLogin) return true;
+  if (isInLogin) {
+    return isLogined ? toHomeRoute(to.query.returnUrl) : true;
+  }
 
   // To Whitelist
   const isInWl = toIsWhitelist(nextName);
