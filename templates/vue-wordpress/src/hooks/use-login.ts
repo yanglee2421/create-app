@@ -75,9 +75,6 @@ export function useLogin() {
 
     await nextTick();
     await router.push({ name: "login" });
-
-    ElMessage.closeAll();
-    ElMessage.success("Goodbye my friend!");
   };
 
   // Update User
