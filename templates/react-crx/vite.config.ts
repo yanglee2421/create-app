@@ -19,7 +19,7 @@ export default defineConfig({
 
   // Dev Server
   server: {
-    port: 3006,
+    port: 3005,
   },
 
   // Build Config
