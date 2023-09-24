@@ -4,3 +4,6 @@
 [submodule "templates/react-antd"]
 	path = templates/react-antd
 	url = https://github.com/yanglee2421/react-antd.git
+[submodule "templates/react-mui"]
+	path = templates/react-mui
+	url = https://github.com/yanglee2421/react-mui.git
