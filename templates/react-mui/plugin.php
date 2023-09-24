@@ -11,8 +11,8 @@ Version: 1.0.0
 function load_assets($hook)
 {
     $ver = '0.0.1';
-    wp_enqueue_style('vite', plugin_dir_url(__FILE__) . '/dist/assets/index.css', array(), $ver, false);
-    wp_enqueue_script('vite', plugin_dir_url(__FILE__) . '/dist/assets/wp-vite-main.js', array(), $ver, true);
+    wp_enqueue_style('vite', plugin_dir_url(__FILE__) . 'dist/assets/index.css', array(), $ver, false);
+    wp_enqueue_script('vite', plugin_dir_url(__FILE__) . 'dist/assets/wp-vite-main.js', array(), $ver, true);
 }
 
 add_action('admin_enqueue_scripts', 'load_assets');
