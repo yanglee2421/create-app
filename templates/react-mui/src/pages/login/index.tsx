@@ -52,7 +52,14 @@ export function Component() {
 
   return (
     <Box display={"flex"} height={"100%"}>
-      <Box flex={1}></Box>
+      <Box flex={1}>
+        <ul>
+          <li>xasd</li>
+          <li>xasd</li>
+          <li>xasd</li>
+        </ul>
+        <img src="" alt="" />
+      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}

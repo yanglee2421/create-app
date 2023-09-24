@@ -32,7 +32,7 @@ export default defineConfig((configEnv) => {
     },
 
     // Base URL
-    base: "/mui",
+    base: "./",
 
     // ** Build
     build: build(configEnv),
