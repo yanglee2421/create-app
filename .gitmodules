@@ -1,3 +1,6 @@
 [submodule "templates/vue-ele"]
 	path = templates/vue-ele
 	url = https://github.com/yanglee2421/vite-vue
+[submodule "templates/react-antd"]
+	path = templates/react-antd
+	url = https://github.com/yanglee2421/react-antd.git
