@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // NodeJs Imports
 import { resolve } from "node:path";
 
