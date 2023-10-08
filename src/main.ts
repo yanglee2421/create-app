@@ -12,6 +12,20 @@ import { editPackage } from "./edit-package";
 import { toIoPath } from "./to-io-path";
 import { editGitignore } from "./edit-gitignore";
 
+// Kolorist Imports
+import kolorist from "kolorist";
+
+// Spawn Imports
+import spawn from "cross-spawn";
+
+// Minimist Imports
+import minimist from "minimist";
+
+const argv = minimist(process.argv.slice(2), { string: ["_"] });
+console.log(argv);
+console.log(kolorist.red("Operation cancelled"));
+spawn.sync("pnpm -v");
+
 init();
 
 async function init() {
@@ -20,21 +34,28 @@ async function init() {
 }
 
 function prompt(): Promise<Answer> {
-  return prompts([
+  return prompts(
+    [
+      {
+        type: "select",
+        name: "framework",
+        message: "select a framework",
+        choices: getChoices(),
+        initial: 0,
+      },
+      {
+        type: "text",
+        name: "projectName",
+        message: "type a project name",
+        initial: "my-app",
+      },
+    ],
     {
-      type: "select",
-      name: "framework",
-      message: "select a framework",
-      choices: getChoices(),
-      initial: 0,
-    },
-    {
-      type: "text",
-      name: "projectName",
-      message: "type a project name",
-      initial: "my-app",
-    },
-  ]);
+      onCancel(prompt, answers) {
+        console.log("cancel");
+      },
+    }
+  );
 }
 export interface Answer {
   projectName: string;
