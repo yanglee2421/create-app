@@ -7,3 +7,6 @@
 [submodule "templates/react-mui"]
 	path = templates/react-mui
 	url = https://github.com/yanglee2421/react-mui.git
+[submodule "templates/react-crx"]
+	path = templates/react-crx
+	url = https://github.com/yanglee2421/react-crx.git
