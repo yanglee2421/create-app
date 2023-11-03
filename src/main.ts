@@ -13,7 +13,7 @@ import { toIoPath } from "./to-io-path";
 import { editGitignore } from "./edit-gitignore";
 
 // Kolorist Imports
-import kolorist from "kolorist";
+import * as kolorist from "kolorist";
 
 // Spawn Imports
 import spawn from "cross-spawn";
