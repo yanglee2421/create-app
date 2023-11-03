@@ -84,24 +84,24 @@ async function handleFile(params: Answer) {
 function getChoices(): prompts.Choice[] {
   return [
     {
+      title: "React + Antd",
+      value: "react-antd",
+      description: "React with Ant Design",
+    },
+    {
+      title: "React + CRX",
+      value: "react-crx",
+      description: "React for Google Chrome CRX",
+    },
+    {
       title: "react + mui",
       value: "react-mui",
-      description: "React with mui",
+      description: "React with Material UI",
     },
     {
-      title: "react + antd",
-      value: "react-antd",
-      description: "React with ant design",
-    },
-    {
-      title: "react + crx",
-      value: "react-crx",
-      description: "React for google chrome crx",
-    },
-    {
-      title: "vue + wordpress",
-      value: "vue-wordpress",
-      description: "Vue for wordpress plugins",
+      title: "Vue + Element Plus",
+      value: "vue-ele",
+      description: "Vue with Element Plus",
     },
   ];
 }
