@@ -13,8 +13,6 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: npm
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.merged == true }}
     env:
