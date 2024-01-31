@@ -1,7 +1,7 @@
 # create-app
 
-[![version](https://img.shields.io/badge/version-0.0.13-blue)](https://www.npmjs.com/package/@yanglee2421/create-app?activeTab=readme)
-![pnpm](https://img.shields.io/badge/pnpm-v8.14.2-orange)
+[![version](https://img.shields.io/badge/version-0.0.15-blue)](https://www.npmjs.com/package/@yanglee2421/create-app?activeTab=readme)
+![pnpm](https://img.shields.io/badge/pnpm-latest-orange)
 ![dependencies](https://img.shields.io/badge/dependencies-vite-brightgreen)
 ![developer](https://img.shields.io/badge/developer-YangLee-f39f37)
 
