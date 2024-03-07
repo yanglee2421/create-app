@@ -1,37 +1,24 @@
 #!/usr/bin/env node
 
-// NodeJs Imports
 import { resolve } from "node:path";
-
-// Prompt Imports
-import prompts from "prompts";
-
-// Utils Imports
-import { copyDir } from "./copy-dir";
-import { editPackage } from "./edit-package";
-import { toIoPath } from "./to-io-path";
-import { editGitignore } from "./edit-gitignore";
-
-// Kolorist Imports
-import * as kolorist from "kolorist";
-
-// Spawn Imports
 import spawn from "cross-spawn";
-
-// Minimist Imports
+import * as kolorist from "kolorist";
 import minimist from "minimist";
+import prompts from "prompts";
+import { copyDir } from "./copyDir";
+import { editGitignore } from "./editGitignore";
+import { editPackage } from "./editPackage";
+import { toIoPath } from "./toIoPath";
+
+void (async () => {
+  const answer = await prompt();
+  handleFile(answer);
+})();
 
 const argv = minimist(process.argv.slice(2), { string: ["_"] });
 console.log(argv);
 console.log(kolorist.red("Operation cancelled"));
 spawn.sync("pnpm -v");
-
-init();
-
-async function init() {
-  const answer = await prompt();
-  handleFile(answer);
-}
 
 function prompt(): Promise<Answer> {
   return prompts(
@@ -51,34 +38,33 @@ function prompt(): Promise<Answer> {
       },
     ],
     {
-      onCancel(prompt, answers) {
+      onCancel() {
         console.log("cancel");
       },
-    }
+    },
   );
 }
+
 export interface Answer {
   projectName: string;
   framework: string;
 }
 
 async function handleFile(params: Answer) {
-  // ** Params
   const { projectName } = params;
 
-  // Get IO-Path With Answer
   const [input, output] = toIoPath(params);
 
-  // Copy Files With IO-Path
   await copyDir({ input, output });
 
-  // Edit package.json
-  const jsonPath = resolve(output, "package.json");
-  editPackage({ jsonPath, name: projectName });
+  editPackage({
+    jsonPath: resolve(output, "package.json"),
+    name: projectName,
+  });
 
-  // Edit .gitignore
-  const filePath = resolve(output, "_gitignore");
-  editGitignore({ filePath });
+  editGitignore({
+    filePath: resolve(output, "_gitignore"),
+  });
 }
 
 function getChoices(): prompts.Choice[] {

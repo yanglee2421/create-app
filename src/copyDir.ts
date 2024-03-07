@@ -1,5 +1,3 @@
-// NodeJs Imports
-import { resolve } from "node:path";
 import {
   copyFile,
   access,
@@ -8,19 +6,17 @@ import {
   stat,
   mkdir,
 } from "node:fs/promises";
+import { resolve } from "node:path";
 
-export async function copyDir(params: CopyDirParams) {
-  // ** Params
+export async function copyDir(params: Params) {
   const { input, output } = params;
 
-  // Output must can be accessed
   try {
     await access(output, constants.R_OK);
   } catch {
     await mkdir(output);
   }
 
-  // List Directory Contents
   const list = await readdir(input);
   for (const item of list) {
     const neoInput = resolve(input, item);
@@ -29,7 +25,6 @@ export async function copyDir(params: CopyDirParams) {
     const states = await stat(neoInput);
     const isDir = states.isDirectory();
 
-    // Is Directoy
     if (isDir) {
       await copyDir({
         input: neoInput,
@@ -38,11 +33,10 @@ export async function copyDir(params: CopyDirParams) {
       continue;
     }
 
-    // Is File
     await copyFile(neoInput, neoOutput);
   }
 }
-interface CopyDirParams {
+interface Params {
   input: string;
   output: string;
 }
