@@ -10,15 +10,29 @@ import { editGitignore } from "./editGitignore";
 import { editPackage } from "./editPackage";
 import { toIoPath } from "./toIoPath";
 
-void (async () => {
-  const answer = await prompt();
-  handleFile(answer);
-})();
+const args = minimist(process.argv);
+console.log(args);
 
-const argv = minimist(process.argv.slice(2), { string: ["_"] });
-console.log(argv);
-console.log(kolorist.red("Operation cancelled"));
-spawn.sync("pnpm -v");
+const buffer = spawn.sync("node", ["-v"]);
+
+if (buffer.error) {
+  console.log(kolorist.red(buffer.error.message));
+}
+
+console.log(kolorist.yellow(buffer.stdout.toString()));
+
+void (async () => {
+  try {
+    const answer = await prompt();
+    const output = await handleFile(answer);
+
+    console.log(kolorist.blue(output));
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(kolorist.red(error.message));
+    }
+  }
+})();
 
 function prompt(): Promise<Answer> {
   return prompts(
@@ -39,7 +53,11 @@ function prompt(): Promise<Answer> {
     ],
     {
       onCancel() {
-        console.log("cancel");
+        throw new Error("Canceled");
+      },
+      onSubmit(prompt, answer) {
+        void prompt;
+        console.log(kolorist.green(answer));
       },
     },
   );
@@ -65,6 +83,8 @@ async function handleFile(params: Answer) {
   editGitignore({
     filePath: resolve(output, "_gitignore"),
   });
+
+  return output;
 }
 
 function getChoices(): prompts.Choice[] {
